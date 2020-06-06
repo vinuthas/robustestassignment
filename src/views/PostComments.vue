@@ -24,7 +24,7 @@ data(){
   }
 },
 created(){
-  axios.get(`https://jsonplaceholder.typicode.com/comments?postId=${this.id}`)
+  axios.get("http://localhost:3000/comments?postId="+this.id)
   .then(response => {this.comments=response.data
   console.log(this.comments)}
   )

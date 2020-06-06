@@ -12,7 +12,7 @@
             </div>
         </div>
         <h4 :style="{'color':'White' ,'position':'absolute','left':'0'}"><em>Comments</em></h4>
-     <PostComments :style="{'position':'relative','top':'40px'}"></PostComments>   
+     <PostComments :id="post.id" :style="{'position':'relative','top':'40px'}"></PostComments>   
     </div>
     
   
@@ -33,7 +33,7 @@ components:{
     PostComments
 },
 created(){
-    axios.get(`http://jsonplaceholder.typicode.com/posts/${this.id}`)
+    axios.get("http://localhost:3000/posts/"+this.id)
     .then((response)=>{
         this.post=response.data
         console.log(this.post)})

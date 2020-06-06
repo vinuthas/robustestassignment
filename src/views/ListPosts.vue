@@ -5,9 +5,9 @@
             <div class="card-body">
                 <h3><router-link :to="`/post-details/${post.id}`">{{post.title}}</router-link></h3>
                 <p>{{post.body}}</p>
-                <button type="button" class="hi btn btn-warning" :style="{'cursor': 'pointer'}" @click="Edit(post)">Edit</button>
+                <button type="button" class="hi btn btn-warning" :style="{'cursor': 'pointer'}" @click="Edit(post.id)">Edit</button>
                 <button type="button" class="hi btn btn-secondary" :style="{'cursor': 'pointer','bottom': '0',
-    'left':'25%'}">Delete</button>
+    'left':'25%'}" @click="$emit('DeletePost',post.id)">Delete</button>
             </div>
              
        </div>
@@ -24,13 +24,13 @@
         </button>
        
        </div>
-    
-                <em v-else :style="{'color':'white','position':'absolute','left':'50%'}">Sorry something went wrong :(</em>
+     <em v-else :style="{'color':'white','position':'absolute','left':'50%'}">Nothing to display :(</em>
   </div>
 </template>
 
 <script>
 import router from '@/router'
+
 export default {
     name: "ListPosts",
     props: ["posts"],
@@ -47,10 +47,11 @@ export default {
       prevPage(){
         this.pageNumber--;
       },
-      Edit(post){
-        console.log(post,"edit")
-        router.push({name:"edit-post",params:{id:post.id,postData:post}})
+      Edit(id){
+        console.log(this.post,"edit")
+        router.push({name:"edit-post",params:{id}})
       }
+      
   },
   computed:{
     pageCount(){

@@ -6,14 +6,10 @@
     </div></div>
     <div class="md-form mb-3  mt-5 " :style="{'position':'relative','left':'17%'}">
     <input type="text" class="form-control" :style="{'width':'900px','display':'inline'}" placeholder="Search.." name="search" v-model="searchText" >
-  
-
-  </div>
-   
-        
+    </div>
     <strong v-if="loading" :style="{'color':'white','position':'absolute','left':'50%'}">loading....</strong>
     <div v-else>
-   <ListPosts  :posts="filteredData"/>
+   <ListPosts  :posts="filteredData" @DeletePost="deletePost"/>
    </div>
   </div>
 </template>
@@ -38,21 +34,33 @@ export default {
     }
   },
   computed: {
-   filteredData(){
-     if(this.searchText){
+   filteredData:{
+     get:function(){if(this.searchText){
       return this.posts.filter((ele) => {return this.searchText.toLowerCase().split(' ').every(post => ele.title.toLowerCase().includes(post))})
      }
      else{
        return this.posts
+     }},
+     set:function(data){
+       return data
      }
    }},
    methods:{
    navigate(){
       router.push("add-post")
+   },
+   deletePost(id){
+     axios.delete("http://localhost:3000/posts/"+id)
+     .then(res=>{
+       this.posts=this.posts.filter(post =>{return post.id !== id})
+       this.filteredData=this.posts
+       console.log(res)
+     })
+     .catch(err=>alert(err))
    }
   },
  created(){
-    axios.get(`http://jsonplaceholder.typicode.com/posts`,{headers:{'Access-Control-Allow-Origin':'*','Content-Type':'application/json'}})
+    axios.get(`http://localhost:3000/posts`)
     .then(response=>{
       this.posts=response.data
       this.loading=false
