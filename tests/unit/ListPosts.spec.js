@@ -13,6 +13,7 @@ describe('ListPosts', () => {
   it('has all required methods',()=>{
     expect(typeof wrapper.vm.prevPage).toBe('function')
     expect(typeof wrapper.vm.nextPage).toBe('function')
+    expect(typeof wrapper.vm.getAllPosts).toBe('function')
   })
 
 })
