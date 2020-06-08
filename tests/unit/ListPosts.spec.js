@@ -8,8 +8,6 @@ describe('ListPosts', () => {
     expect (typeof ListPosts.created).toBe('function')
   })
   it('has edit method',()=>{
-    
-
     expect(typeof wrapper.vm.Edit).toBe('function')
   })
   it('has all required methods',()=>{
