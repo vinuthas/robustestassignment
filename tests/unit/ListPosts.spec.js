@@ -15,5 +15,6 @@ describe('ListPosts', () => {
     expect(typeof wrapper.vm.nextPage).toBe('function')
     expect(typeof wrapper.vm.getAllPosts).toBe('function')
   })
+ 
 
 })

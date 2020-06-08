@@ -11,15 +11,16 @@ describe('PostComments', () => {
     
     expect (typeof PostComments.created).toBe('function')
   })
-  it("renders without any errors",async()=>
+  it("renders without any errors",()=>
   {
-    const wrapper = await shallowMount(PostComments,{localVue, router})
+    const wrapper = shallowMount(PostComments,{localVue, router})
     expect(wrapper).toBeTruthy()
   })
-    it('has a card div element',async()=>{
-         const wrapper =await shallowMount(PostComments,{localVue, router})
+    it('has a card div element',()=>{
+         const wrapper = shallowMount(PostComments,{localVue, router})
   
-      expect((wrapper.find(".post-comments")).exists()).toBe(true)
+      expect(wrapper.find(".post-comments").exists()).toBe(true)
+     
      })
   
 })
