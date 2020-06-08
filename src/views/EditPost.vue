@@ -2,7 +2,7 @@
 <div class="mx-auto" :style="{'max-width':'900px'}">
     <input class="form-control mb-4" type="text" v-model="post.title">
     <textarea class="form-control form-control-lg mb-4" type="text" v-model="post.body"/>
-    <button type="submit" class="btn btn-primary mb-2" @click="update">Update</button>
+    <button type="submit" class="update btn btn-primary mb-2" @click="update">Update</button>
 </div>
 </template>
 
@@ -19,11 +19,17 @@ data(){
     }
 },
 methods:{
-update:function(){
-  let payload={
- title: this.post.title,
-      body: this.post.body,
-      userId: this.post.userId
+  getAllPosts()
+  {
+    axios.get("http://localhost:3000/posts/"+this.id)
+    .then(response=>this.post=response.data)
+    .catch(err=>console.log(err))
+  },
+  update:function(){
+    let payload={
+    title: this.post.title,
+    body: this.post.body,
+    userId: this.post.userId
   }
     axios.put("http://localhost:3000/posts/"+this.id,payload).then(response=>{
         console.log(response.data)
@@ -34,13 +40,13 @@ update:function(){
         padding: '3em',
         background: '#fff'
       }),
-router.push({path:"/"})
-    }).catch(err=>console.log(err))
+      router.push({path:"/"})
+     })
+     .catch(err=>console.log(err))
 }
 },
 created(){
-  axios.get("http://localhost:3000/posts/"+this.id).then(response=>this.post=response.data)
-  .catch(err=>console.log(err))
+  this.getAllPosts()
 }
 }
 </script>

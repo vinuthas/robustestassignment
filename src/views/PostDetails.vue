@@ -14,8 +14,6 @@
         <h4 :style="{'color':'White' ,'position':'absolute','left':'0'}"><em>Comments</em></h4>
      <PostComments :id="post.id" :style="{'position':'relative','top':'40px'}"></PostComments>   
     </div>
-    
-  
 </template>
 
 <script>
@@ -32,12 +30,18 @@ data(){
 components:{
     PostComments
 },
-created(){
+methods:{
+    getPostDetail:function(){
     axios.get("http://localhost:3000/posts/"+this.id)
     .then((response)=>{
         this.post=response.data
         console.log(this.post)})
     .catch((err)=>{console.log(err)})
+}
+
+},
+created(){
+   this.getPostDetail()
 }
 }
 </script>

@@ -2,15 +2,15 @@
   <div class="home" >
     <div class="row mb-3 " :style="{'position':'relative'}">
     <div class="col text-right" :style="{'position':'absolute','right':'5'}">
-    <button class="btn btn-primary" @click="navigate">Create new post</button>
+    <button class="new-post btn btn-primary" @click="navigate">Create new post</button>
     </div></div>
     <div class="md-form mb-3  mt-5 " :style="{'position':'relative','left':'17%'}">
     <input type="text" class="form-control" :style="{'width':'900px','display':'inline'}" placeholder="Search.." name="search" v-model="searchText" >
     </div>
     <strong v-if="loading" :style="{'color':'white','position':'absolute','left':'50%'}">loading....</strong>
-    <div v-else>
-   <ListPosts  :posts="filteredData" @DeletePost="deletePost"/>
-   </div>
+    <div v-show="!loading">
+   <list-posts  :posts="filteredData" @DeletePost="deletePost"></list-posts>
+    </div>
   </div>
 </template>
 
@@ -28,7 +28,6 @@ export default {
   data(){
     return{
       posts: [],
-      errors:[],
       searchText:'',
       loading:true
     }
@@ -46,30 +45,32 @@ export default {
      }
    }},
    methods:{
-   navigate(){
+   navigate:function(){
       router.push("add-post")
    },
-   deletePost(id){
+   getPosts:function(){
+     console.log("inside getPosts")
+    axios.get('http://localhost:3000/posts').then(response=>{ 
+      this.posts=response.data,
+      this.loading=false
+    }).catch(e=>{
+     alert(e)
+    })
+    
+   },
+   deletePost:function(id){
      axios.delete("http://localhost:3000/posts/"+id)
      .then(res=>{
+       console.log(res)
        this.posts=this.posts.filter(post =>{return post.id !== id})
        this.filteredData=this.posts
-       console.log(res)
+       
      })
      .catch(err=>alert(err))
    }
   },
  created(){
-    axios.get(`http://localhost:3000/posts`)
-    .then(response=>{
-      this.posts=response.data
-      this.loading=false
-    })
-    .catch(e=>{
-     this.errors.push(e.message)
-     console.log(this.errors)
-     this.loading=false
-    })
+   this.getPosts()
   }
 }
 </script>

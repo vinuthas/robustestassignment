@@ -23,16 +23,19 @@ data(){
     comments: []
   }
 },
+methods:{
+  getComments(){
+    axios.get("http://localhost:3000/comments?postId="+this.id)
+      .then(response => {
+        this.comments=response.data
+      
+      })
+      .catch(err => console.log(err)
+    )
+  }
+},
 created(){
-  axios.get("http://localhost:3000/comments?postId="+this.id)
-  .then(response => {this.comments=response.data
-  console.log(this.comments)}
-  )
-  .catch(err => console.log(err))
+  this.getComments()
 }
 }
 </script>
-
-<style>
-
-</style>
