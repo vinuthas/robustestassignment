@@ -1,16 +1,19 @@
-<template>
-  <div class="post-comments ">
+<template>   <!-- Indentations were not consistent, here I made indentations with htwo spaces-->
+  <div class="post-comments">
     <div class="card text-white bg-dark mb-1 mx-auto" style="max-width: 800px;"  v-for="comment of comments" :key="comment.id">
-      <div class="card-body">
-        <div class="card-title"><h5>{{comment.name}}</h5></div>
-        <div class="card-text"><p>{{comment.body}}</p></div>
+      <div class="card-body"><!--proper nesting is done-->
+        <div class="card-title">
+          <h5>{{comment.name}}</h5>
+        </div>
+        <div class="card-text">
+          <p>{{comment.body}}</p>
+        </div>
       </div>
       <div class="card-footer">
-    <small class="text-muted"><em>{{comment.email}}</em></small>
-    </div>
+        <small class="text-muted"><em>{{comment.email}}</em></small>
+      </div>
+   </div>
   </div>
-</div>
-  
 </template>
 
 <script>

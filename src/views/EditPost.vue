@@ -1,9 +1,9 @@
 <template>
-<div class="mx-auto" :style="{'max-width':'900px'}">
+  <div class="mx-auto" :style="{'max-width':'900px'}">
     <input class="form-control mb-4" type="text" v-model="post.title">
     <textarea class="form-control form-control-lg mb-4" type="text" v-model="post.body"/>
     <button type="submit" class="update btn btn-primary mb-2" @click="update">Update</button>
-</div>
+  </div>
 </template>
 
 <script>

@@ -1,15 +1,16 @@
 <template>
   <div class="home" >
     <div class="row mb-3 " :style="{'position':'relative'}">
-    <div class="col text-right" :style="{'position':'absolute','right':'5'}">
-    <button class="new-post btn btn-primary" @click="navigate">Create new post</button>
-    </div></div>
+      <div class="col text-right" :style="{'position':'absolute','right':'5'}">
+        <button class="new-post btn btn-primary" @click="navigate">Create new post</button>
+      </div>
+    </div>
     <div class="md-form mb-3  mt-5 " :style="{'position':'relative','left':'17%'}">
-    <input type="text" class="form-control" :style="{'width':'900px','display':'inline'}" placeholder="Search.." name="search" v-model="searchText" >
+      <input type="text" class="form-control" :style="{'width':'900px','display':'inline'}" placeholder="Search.." name="search" v-model="searchText" >
     </div>
     <strong v-if="loading" :style="{'color':'white','position':'absolute','left':'50%'}">loading....</strong>
     <div v-show="!loading">
-   <list-posts  :posts="filteredData" @DeletePost="deletePost"></list-posts>
+      <list-posts  :posts="filteredData" @DeletePost="deletePost"></list-posts>
     </div>
   </div>
 </template>

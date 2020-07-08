@@ -1,13 +1,14 @@
 <template>
  <div class="mx-auto" :style="{'max-width':'900px'}">
    <form>
-    <input class="form-control mb-4" type="text" v-model="title" placeholder="Enter post title here" required>
-    <textarea class="form-control form-control-lg mb-4" type="text" v-model="body" placeholder="Enter post content here"/>
-    <select v-model="userId" required>
-    <option v-for="user in users" :key="user.id" :value="user.id">{{user.id}}</option>
-    </select><br/>
-    <button type="submit" class="btn btn-primary mb-2" @click="handlePost">Add</button></form>
-</div>
+      <input class="form-control mb-4" type="text" v-model="title" placeholder="Enter post title here" required>
+      <textarea class="form-control form-control-lg mb-4" type="text" v-model="body" placeholder="Enter post content here"/>
+      <select v-model="userId" required>
+        <option v-for="user in users" :key="user.id" :value="user.id"> {{user.id}} </option>
+      </select> <br/>
+      <button type="submit" class="btn btn-primary mb-2" @click="handlePost"> Add </button>
+    </form>
+ </div>
 </template>
 
 <script>
