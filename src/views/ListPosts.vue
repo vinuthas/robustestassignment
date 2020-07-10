@@ -23,71 +23,65 @@
 import router from '@/router'
 import axios from 'axios'
 export default {
-    name: "ListPosts",
-    props: ["posts"],
-    data(){
-        return {
-            pageNumber: 0,
-            size:4,
-            allPosts: []
-        }
-    },
-      methods:{
-      nextPage(){
-         this.pageNumber++;
-      },
-      prevPage(){
-        this.pageNumber--;
-      },
-      Edit(id){
-        console.log(this.post,"edit")
-        router.push({name:"edit-post",params:{id}})
-      },
-       getAllPosts(){
-        console.log("inside getPosts")
-        axios.get("http://localhost:3000/posts")
-        .then(response=>{ this.allPosts=response.data
-      
+name: "ListPosts",
+props: ["posts"],
+data(){
+  return {
+    pageNumber: 0,
+    size:4,
+    allPosts: []
+  }
+},
+methods:{
+  nextPage(){
+    this.pageNumber++;
+  },
+  prevPage(){
+    this.pageNumber--;
+  },
+  Edit(id){
+    console.log(this.post,"edit")
+    router.push({name:"edit-post",params:{id}})
+  },
+  getAllPosts(){
+    console.log("inside getPosts")
+    axios.get("http://localhost:3000/posts")
+    .then(response => { 
+      this.allPosts=response.data
     })
     .catch(e=>{
       console.log(e)
     })
-   }
-      
+  }},
+computed:{
+  pageCount(){
+    let l;
+    if(this.posts){
+      l = this.posts.length
+    }
+    else{
+      l = this.allPosts.length
+    }
+    let  s = this.size;
+    return Math.ceil(l/s);
   },
-  computed:{
-    pageCount(){
-      let l;
-      if(this.posts){
-      l = this.posts.length}
-      else
-      {
-        l = this.allPosts.length
-      }
-        let  s = this.size;
-           
-      return Math.ceil(l/s);
-           
-    },
-    paginatedData(){
-
-      const start = this.pageNumber* this.size,
-            end = start + this.size;  
-            if(this.posts){
-      return this.posts
-               .slice(start, end);}
-               else{
-                 return this.allPosts
-               .slice(start, end);
-               }
-     }
-  },
-  created(){
-   if(!this.posts)
-    {
-      this.getAllPosts()
+  paginatedData(){
+    const start = this.pageNumber* this.size,
+    end = start + this.size;  
+    if(this.posts){
+      return this.posts.slice(start, end);
+    }
+    else{
+      return this.allPosts.slice(start, end);
     }
   }
+},
+created(){
+  if(!this.posts)
+  {
+    this.getAllPosts()
+  }
+}
 }
 </script>
 

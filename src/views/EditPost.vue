@@ -30,20 +30,20 @@ methods:{
     title: this.post.title,
     body: this.post.body,
     userId: this.post.userId
-  }
+    }
     axios.put("http://localhost:3000/posts/"+this.id,payload).then(response=>{
-        console.log(response.data)
-        Swal.fire({
-        title: this.post.title,
-        confirmButtonText:"Updated",
-        width: 500,
-        padding: '3em',
-        background: '#fff'
-      }),
-      router.push({path:"/"})
-     })
-     .catch(err=>console.log(err))
-}
+      console.log(response.data)
+      Swal.fire({
+      title: this.post.title,
+      confirmButtonText:"Updated",
+      width: 500,
+      padding: '3em',
+      background: '#fff'
+    }),
+     router.push({path:"/"})
+    })
+    .catch(err=>console.log(err))
+  }
 },
 created(){
   this.getAllPosts()

@@ -27,19 +27,21 @@ data(){
 methods:{
   getUsers(){
     axios.get('http://localhost:3000/users')
-    .then(response=>{this.users=response.data 
-    console.log(this.users)})
-    .catch(err=>console.log(err)) 
+    .then( response => { 
+      this.users=response.data 
+      // console.log(this.users)
+    })
+    .catch( err => console.log(err)) 
   },
   handlePost(){
     event.preventDefault()
-    let payload={
+    let payload = {
       title: this.title,
       body: this.body,
       userId: this.userId
     }
-    if(payload.title!='' && payload.userId!=''){
-      axios.post("http://localhost:3000/posts/",payload)
+    if(payload.title != '' && payload.userId != ''){
+      axios.post("http://localhost:3000/posts/", payload)
         .then(response=>{
           console.log(response.data)
           alert("Post has been created")

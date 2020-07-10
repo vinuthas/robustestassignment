@@ -22,24 +22,23 @@ import PostComments from "@/views/PostComments"
 export default {
 name:"PostDetails",
 data(){
-    return{
-        post: [],
-        id: this.$route.params.id
-    }
+  return{
+    post: [],
+    id: this.$route.params.id
+  }
 },
 components:{
-    PostComments
+  PostComments
 },
 methods:{
-    getPostDetail:function(){
-    axios.get("http://localhost:3000/posts/"+this.id)
-    .then((response)=>{
-        this.post=response.data
-        console.log(this.post)})
-    .catch((err)=>{console.log(err)})
-}
-
-},
+  getPostDetail:function(){
+  axios.get("http://localhost:3000/posts/"+this.id)
+  .then((response)=>{
+    this.post=response.data
+    console.log(this.post)
+  })
+  .catch((err)=>{console.log(err)})
+}},
 created(){
    this.getPostDetail()
 }

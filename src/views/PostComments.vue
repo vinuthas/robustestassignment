@@ -29,10 +29,7 @@ data(){
 methods:{
   getComments(){
     axios.get("http://localhost:3000/comments?postId="+this.id)
-      .then(response => {
-        this.comments=response.data
-      
-      })
+      .then(response => { this.comments=response.data })
       .catch(err => console.log(err)
     )
   }
