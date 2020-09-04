@@ -1,6 +1,5 @@
-
 {
-  posts : [],
-  users : [],
-  comments : [],
+  "posts" : [],
+  "users" : [],
+  "comments" : []
 }
